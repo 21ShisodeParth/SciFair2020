@@ -1,0 +1,199 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import preprocessing as pp
+import scipy
+df = pd.read_csv('gtrends.csv', skiprows = 2)
+vals = df['Google: (United States)'].values
+df2 = pd.read_csv('GOOG (1).csv')
+google_stock_prices = df2['Open'].values
+df3 = pd.read_csv('nasdaq.csv')
+vals3 = df3['Open'].values
+vals4 = df3['Volume'].values
+df4 = pd.read_csv('sandp.csv')
+vals5 = df4['Open'].values
+sandp_open = vals5[1:]
+vals6 = df4['Volume'].values
+sandp_volume = vals6[1:]
+
+nasdaq_open = vals3[1:]
+nasdaq_volume = vals4[1:]
+google_trends = []
+for i in range (len(vals)):
+    for a in range (5):
+        google_trends.append(vals[i-1])
+google_trends = google_trends[23:]
+
+mat = pd.read_csv("GOOG_trends.csv", skiprows = 2)
+vals10 = mat['GOOG: (United States)'].values
+
+GOOG_trends = []
+for i in range (len(vals10)):
+    for a in range (5):
+        GOOG_trends.append(vals10[i-1])
+GOOG_trends = GOOG_trends[23:]
+
+print(len(GOOG_trends))
+print(len(sandp_open))
+print(len(sandp_volume))
+print(len(nasdaq_open))
+print(len(nasdaq_volume))
+print(len(google_trends))
+print(len(google_stock_prices))
+
+dowjones = pd.read_csv('dowjones.csv')['Open'].values[1:]
+print(len(dowjones))
+
+st_sandp_open = pp.scale(sandp_open)
+st_sandp_volume = pp.scale(sandp_volume)
+st_nasdaq_open = pp.scale(nasdaq_open)
+st_nasdaq_volume = pp.scale(nasdaq_volume)
+st_google_trends = pp.scale(google_trends)
+st_google_stock_prices = pp.scale(google_stock_prices)
+st_GOOG_trends = pp.scale(GOOG_trends)
+st_dj_open = pp.scale(dowjones)
+
+print(st_nasdaq_open)
+print(st_google_stock_prices)
+
+print("GOOG trends & Google stock price :", round(np.corrcoef(st_nasdaq_open, st_google_stock_prices)[1][0], 5))
+
+import matplotlib
+from datetime import datetime, timedelta
+from matplotlib import dates as mpl_dates
+
+plt.plot(st_nasdaq_open, color='red',  label="NASDAQ Open")
+plt.plot(st_google_stock_prices, color = 'blue', label = "Google Stock Prices")
+plt.plot(st_sandp_open, color = 'green', label = 'S&P 500 Open')
+#plt.plot(st_GOOG_trends, color = 'green', label = 'GOOG trends')
+#plt.plot(st_google_trends, color = 'orange', label = 'Google')
+
+plt.style.use('seaborn')
+
+#matplotlib.pyplot.xticks(np.arange(2), ('Jan 2018'), fontsize = 100, rotation = 20)
+plt.legend()
+
+matplotlib.pyplot.text(0,-4, "Oct. 2017", fontsize=7, rotation = 30)
+matplotlib.pyplot.text(0,-4, ". 2017", fontsize=7, rotation = 30)
+matplotlib.pyplot.text(0,-4, "Oct. 2017", fontsize=7, rotation = 30)
+matplotlib.pyplot.text(0,-4, "Oct. 2017", fontsize=7, rotation = 30)
+matplotlib.pyplot.text(0,-4, "Oct. 2017", fontsize=7, rotation = 30)
+matplotlib.pyplot.text(0,-4, "Oct. 2017", fontsize=7, rotation = 30)
+matplotlib.pyplot.text(0,-4, "Oct. 2017", fontsize=7, rotation = 30)
+
+import matplotlib
+from datetime import datetime, timedelta
+from matplotlib import dates as mpl_dates
+
+plt.plot(st_nasdaq_open, color='brown',  label="NASDAQ Open")
+plt.plot(st_google_stock_prices, color = 'blue', label = "Google Stock Prices")
+
+plt.style.use('seaborn')
+
+#nasdaq
+matplotlib.pyplot.text(0,-4.25, "Oct. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(21.62,-4.25, "Nov. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(43.24,-4.25, "Dec. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(64.86,-4.25, "Jan. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(86.48,-4.25, "Feb. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(108.1,-4.25, "Mar. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(129.72,-4.25, "Apr. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(151.34,-4.25, "May 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(172.96,-4.25, "June 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(194.58,-4.25, "July 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(216.2,-4.25, "Aug. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(237.82,-4.25, "Sept. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(259.44,-4.25, "Nov. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(281.06,-4.25, "Dec. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(302.68,-4.25, "Jan. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(324.3,-4.25, "Feb. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(345.92,-4.25, "Mar. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(367.54,-4.25, "May 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(389.16,-4.25, "June 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(410.78,-4.25, "July 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(432.4,-4.25, "Aug. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(454.02,-4.25, "Sept. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(475.64,-4.25, "Oct. 2019", fontsize=7, rotation = 45)
+
+#sandp500
+matplotlib.pyplot.text(0,-4.25, "Oct. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(21.62,-4.25, "Nov. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(43.24,-4.25, "Dec. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(64.86,-4.25, "Jan. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(86.48,-4.25, "Feb. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(108.1,-4.25, "Mar. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(129.72,-4.25, "Apr. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(151.34,-4.25, "May 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(172.96,-4.25, "June 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(194.58,-4.25, "July 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(216.2,-4.25, "Aug. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(237.82,-4.25, "Sept. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(259.44,-4.25, "Nov. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(281.06,-4.25, "Dec. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(302.68,-4.25, "Jan. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(324.3,-4.25, "Feb. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(345.92,-4.25, "Mar. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(367.54,-4.25, "May 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(389.16,-4.25, "June 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(410.78,-4.25, "July 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(432.4,-4.25, "Aug. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(454.02,-4.25, "Sept. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(475.64,-4.25, "Oct. 2019", fontsize=7, rotation = 45)
+
+
+matplotlib.pyplot.xticks(np.arange(0, 503, 21import matplotlib
+from datetime import datetime, timedelta
+from matplotlib import dates as mpl_dates
+plt.plot(st_sandp_open, color = 'green', label = 'S&P 500 Open')
+
+plt.plot(st_google_stock_prices, color = 'blue', label = "Google Stock Prices")
+
+
+
+#dowjones
+matplotlib.pyplot.text(0,-4.25, "Oct. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(21.62,-4.25, "Nov. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(43.24,-4.25, "Dec. 2017", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(64.86,-4.25, "Jan. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(86.48,-4.25, "Feb. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(108.1,-4.25, "Mar. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(129.72,-4.25, "Apr. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(151.34,-4.25, "May 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(172.96,-4.25, "June 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(194.58,-4.25, "July 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(216.2,-4.25, "Aug. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(237.82,-4.25, "Sept. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(259.44,-4.25, "Nov. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(281.06,-4.25, "Dec. 2018", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(302.68,-4.25, "Jan. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(324.3,-4.25, "Feb. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(345.92,-4.25, "Mar. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(367.54,-4.25, "May 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(389.16,-4.25, "June 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(410.78,-4.25, "July 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(432.4,-4.25, "Aug. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(454.02,-4.25, "Sept. 2019", fontsize=7, rotation = 45)
+matplotlib.pyplot.text(475.64,-4.25, "Oct. 2019", fontsize=7, rotation = 45)
+
+
+matplotlib.pyplot.xticks(np.arange(0, 503, 21.62))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
